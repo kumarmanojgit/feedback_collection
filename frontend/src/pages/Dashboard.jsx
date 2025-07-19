@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import API from "../services/api";
 
 const Dashboard = () => {
   const { id } = useParams();
   const [responses, setResponses] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/responses/${id}`)
-      .then((res) => setResponses(res.data));
+    API.get(`/responses/${id}`).then((res) => setResponses(res.data));
   }, [id]);
 
   return (

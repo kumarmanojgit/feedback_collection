@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import API from "../services/api";
 
 const SubmitForm = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [form, setForm] = useState(null);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/forms/${id}`).then((res) => {
+    API.get(`/forms/${id}`).then((res) => {
       setForm(res.data);
       setAnswers(
         res.data.questions.map((q) => ({
@@ -20,11 +24,15 @@ const SubmitForm = () => {
   }, [id]);
 
   const handleSubmit = async () => {
-    await axios.post(`http://localhost:5000/api/responses/${form._id}`, {
-      answers,
-    });
-    alert("Feedback submitted");
+    try {
+      await API.post(`/responses`, { formId: form._id, answers });
+      toast.success("Form created successfully!");
+      setTimeout(() => navigate(`/dashboard/${form._id}`), 1500);
+    } catch (error) {
+      toast.error("Failed to submit");
+    }
   };
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-2xl mx-auto bg-white shadow-md p-6 rounded">

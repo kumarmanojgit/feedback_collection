@@ -1,10 +1,10 @@
 import Response from "../models/Response.js";
-import Form from "../models/Form.js";
 import { Parser } from "json2csv";
 
 export const submitResponse = async (req, res) => {
   try {
-    const { formId, answers } = req.body;
+    const { formId } = req.params;
+    const { answers } = req.body;
     const response = new Response({ formId, answers });
     await response.save();
     res.status(201).json({ message: "Response submitted" });
