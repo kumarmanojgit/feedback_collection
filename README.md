@@ -59,7 +59,8 @@ backend/<br>
 cd frontend<br>
 npm run dev<br>
 
-#Create a .env file inside server:<br>
+# Create a .env file inside server:<br>
+
 MONGO_URI=<your-mongodb-connection-string><br>
 PORT=5000<br>
 JWT_SECRET=<your-secret-key><br>

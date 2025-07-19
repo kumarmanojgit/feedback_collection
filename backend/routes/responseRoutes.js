@@ -7,7 +7,7 @@ import {
 const router = express.Router();
 
 router.post("/:formId", submitResponse);
-router.get("/:formId/export", exportCSV);
 router.get("/:formId", getResponses);
+router.get("/:formId/export", exportCSV);
 
 export default router;
