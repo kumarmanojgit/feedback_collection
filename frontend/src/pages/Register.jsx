@@ -35,9 +35,7 @@ const Register = () => {
         password,
       });
       toast.success("Registration successful");
-      setName("");
-      setEmail("");
-      setPassword("");
+
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
       const msg = err.response?.data?.message || "Already user exist";

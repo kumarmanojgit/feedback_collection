@@ -1,3 +1,4 @@
+
 import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
@@ -9,9 +10,11 @@ export const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
-    req.admin = decoded;
+    req.admin = decoded; // decoded contains { id: admin._id }
     next();
   } catch (error) {
-    res.status(401).json({ message: "Unauthorized", error });
+    return res
+      .status(401)
+      .json({ message: "Unauthorized", error: error.message });
   }
 };
