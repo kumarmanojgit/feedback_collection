@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://feedback-collection-tbzz.vercel.app/api",
+  baseURL: "https://feedback-collection-94rs.vercel.app/api",
 });
 
 // Add Authorization token to every request if available
